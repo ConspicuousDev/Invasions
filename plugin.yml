@@ -1,0 +1,13 @@
+name: Invasions
+main: com.omniscient.invasions.Invasions
+version: 1.0
+author: Omniscient
+commands:
+  invasions:
+    usage: /invasions
+    description: Main plugin command
+    permission: invasions.commands.invasions
+  invasionsconfig:
+    usage: /invasionsconfig
+    description: Config commande
+    permission: invasions.commands.config

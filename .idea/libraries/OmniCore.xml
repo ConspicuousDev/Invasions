@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OmniCore">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../OmniCore/out/artifacts/OmniCore_jar/OmniCore.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
