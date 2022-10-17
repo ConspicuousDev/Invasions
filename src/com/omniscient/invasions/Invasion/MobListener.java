@@ -77,6 +77,14 @@ public class MobListener implements Listener {
     }
 
     @EventHandler
+    public void onTNTDamageMob(EntityDamageByEntityEvent e){
+        if(!(e.getDamager() instanceof TNTPrimed)) return;
+        if(!tnts.contains((TNTPrimed) e.getDamager())) return;
+        if(e.getEntity() instanceof Player) return;
+        e.setCancelled(true);
+    }
+
+    @EventHandler
     public void onInvasionCommand(PlayerCommandPreprocessEvent e){
         if(e.getMessage().trim().toLowerCase().startsWith("/spawn")){
             if(Invasions.invasionInstance == null) return;
