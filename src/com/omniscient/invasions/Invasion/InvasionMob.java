@@ -164,6 +164,7 @@ public class InvasionMob {
             new ItemStack(Material.AIR),
             new ItemStack(Material.AIR)
     };
+    private int dropAmount = 1;
     private final List<ItemStack> drops = new ArrayList<>();
     private final List<Location> locations = new ArrayList<>();
     private final List<Ability> abilities = new ArrayList<>();
@@ -192,6 +193,9 @@ public class InvasionMob {
     public ItemStack[] getItems() {
         return items;
     }
+    public int getDropAmount() {
+        return dropAmount;
+    }
     public List<ItemStack> getDrops() {
         return drops;
     }
@@ -216,6 +220,9 @@ public class InvasionMob {
     }
     public void setDamage(double damage) {
         this.damage = damage;
+    }
+    public void setDropAmount(int dropAmount) {
+        this.dropAmount = dropAmount;
     }
 
     public EntityInsentient summon(Location location){

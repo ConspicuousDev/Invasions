@@ -58,7 +58,7 @@ public class MobEditorGUI extends OmniGUI {
         else if(e.getSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_HALF){
             int index = Arrays.stream(InvasionMob.Type.values()).collect(Collectors.toList()).indexOf(mob.getType());
             mob.setType(InvasionMob.Type.values()[index+1 >= InvasionMob.Type.values().length ? 0 : index+1]);
-        }else if(e.getSlot() == DROPS) new MobDropsEditorGUI(player, invasion, mob).open();
+        }else if(e.getSlot() == DROPS) new MobDropsEditorGUI(player, invasion, mob, true).open();
         else if(e.getSlot() == LOCATIONS) new MobLocationsEditorGUI(player, invasion, mob).open();
         else if(e.getSlot() == GEAR) new MobGearStatEditorGUI(player, invasion, mob).open();
         else if(e.getSlot() == ABILITIES) new MobAbilitySelectorGUI(player, invasion, mob).open();

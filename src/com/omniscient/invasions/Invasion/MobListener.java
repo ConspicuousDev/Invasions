@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MobListener implements Listener {
@@ -38,8 +39,12 @@ public class MobListener implements Listener {
         if(mobType.get() == null) return;
         e.setDroppedExp(0);
         e.getDrops().forEach(item -> item.setType(Material.AIR));
-        mobType.get().getDrops().forEach(drop -> entity.getLocation().getWorld().dropItemNaturally(entity.getLocation(), drop));
-        if(Invasions.invasionInstance == null) return;
+        if(mobType.get().getDrops().size() > 0) {
+            Random r = new Random();
+            for (int i = 0; i < mobType.get().getDropAmount(); i++)
+                entity.getLocation().getWorld().dropItemNaturally(entity.getLocation(), mobType.get().getDrops().get(r.nextInt(mobType.get().getDrops().size())));
+        }
+        if (Invasions.invasionInstance == null) return;
         if(!Invasions.invasionInstance.getEntities().contains(e.getEntity())) return;
         Invasions.invasionInstance.getEntities().remove(e.getEntity());
         if(Invasions.invasionInstance.getEntities().size() > 0) return;

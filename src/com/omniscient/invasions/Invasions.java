@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.omniscient.invasions.Commands.ConfigCommand;
 import com.omniscient.invasions.Commands.InvasionsCommand;
 import com.omniscient.invasions.Invasion.Invasion;
+import com.omniscient.invasions.Invasion.InvasionConfig;
 import com.omniscient.invasions.Invasion.InvasionInstance;
 import com.omniscient.invasions.Invasion.MobListener;
 import com.omniscient.invasions.Mobs.*;
@@ -23,6 +24,8 @@ import java.util.Random;
 
 public class Invasions extends JavaPlugin {
     public static Invasions plugin;
+    public static InvasionConfig config = new InvasionConfig();
+    public static int cooldown = 0;
     public static InvasionInstance invasionInstance = null;
 
     @Override
@@ -47,22 +50,27 @@ public class Invasions extends JavaPlugin {
         OmniCore.registerEntity("CustomWolf", 95, CustomWolf.class);
         OmniCore.registerEntity("CustomGhast", 56, CustomGhast.class);
 
+        config = OmniCore.GSON.fromJson(OmniCore.readFile("config.json"), new TypeToken<InvasionConfig>(){}.getType());
         Invasion.invasions.addAll(OmniCore.GSON.fromJson(OmniCore.readFile("invasions.json"), new TypeToken<List<Invasion>>(){}.getType()));
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(invasionInstance != null) return;
+                cooldown--;
+                if(cooldown >= 0) return;
+                cooldown = 0;
                 if(Invasion.invasions.size() == 0) return;
                 new InvasionInstance(Invasion.invasions.get(new Random().nextInt(Invasion.invasions.size())));
+                cooldown = config.getCooldown();
             }
-        }.runTaskTimer(plugin, 0, 6*3600*20);
+        }.runTaskTimer(plugin, 0, 20);
 
         Methods.consoleLog("&aPlugin enabled.");
     }
 
     @Override
     public void onDisable() {
+        OmniCore.writeFile("config.json", OmniCore.GSON.toJson(config));
         OmniCore.writeFile("invasions.json", OmniCore.GSON.toJson(Invasion.invasions));
 
         if(invasionInstance != null) invasionInstance.close(0);

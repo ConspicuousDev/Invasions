@@ -20,15 +20,15 @@ public class InvasionInstance {
     private final Invasion invasion;
     private final List<Entity> entities = new ArrayList<>();
     private final List<Player> players = new ArrayList<>();
-    private int openedFor = 30*60;
+    private int openedFor = Invasions.config.getDuration();
     public InvasionInstance(Invasion invasion){
         this.invasion = invasion;
         Invasions.invasionInstance = this;
         invasion.getMobs().forEach(mob -> mob.getLocations().forEach(location -> entities.add(mob.summon(location).getBukkitEntity())));
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), invasion.getOpenCommand());
+        if(invasion.getOpenCommand().length() > 0) Bukkit.dispatchCommand(Bukkit.getConsoleSender(), invasion.getOpenCommand());
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color(" ")));
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color("  &eThe invasion "+invasion.getName()+" &ehas started!.")));
-        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color("  &eThe entry is available at &7/invasions&e for 30 minutes.")));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color("  &eThe entry is available at &7/invasions&e for &7"+Methods.getDuration(openedFor)+"&e.")));
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color(" ")));
         new BukkitRunnable() {
             @Override
@@ -60,13 +60,13 @@ public class InvasionInstance {
     }
 
     public void spawnPlayer(Player player, BlockFace blockFace){
-        players.add(player);
         player.teleport(invasion.getLocations().get(blockFace));
+        players.add(player);
     }
 
     public void close(int time){
         Invasions.invasionInstance = null;
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), invasion.getCloseCommand());
+        if(invasion.getCloseCommand().length() > 0) Bukkit.dispatchCommand(Bukkit.getConsoleSender(), invasion.getCloseCommand());
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color(" ")));
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color("  &eThe invasion "+invasion.getName()+" &eis ending in &7"+time+" &eseconds.")));
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(Methods.color("  &eThe entry of new players has been closed.")));
