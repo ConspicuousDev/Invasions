@@ -9,5 +9,5 @@ commands:
     permission: invasions.commands.invasions
   invasionsconfig:
     usage: /invasionsconfig
-    description: Config commande
+    description: Config command
     permission: invasions.commands.config

@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class Invasions extends JavaPlugin {
     public static Invasions plugin;
-    public static InvasionConfig config = new InvasionConfig();
+    public static InvasionConfig config;
     public static int cooldown = 0;
     public static InvasionInstance invasionInstance = null;
 
@@ -50,7 +50,8 @@ public class Invasions extends JavaPlugin {
         OmniCore.registerEntity("CustomWolf", 95, CustomWolf.class);
         OmniCore.registerEntity("CustomGhast", 56, CustomGhast.class);
 
-        config = OmniCore.GSON.fromJson(OmniCore.readFile("config.json"), new TypeToken<InvasionConfig>(){}.getType());
+        InvasionConfig newConfig = OmniCore.GSON.fromJson(OmniCore.readFile("config.json"), new TypeToken<InvasionConfig>(){}.getType());
+        config = newConfig == null ? new InvasionConfig() : newConfig;
         Invasion.invasions.addAll(OmniCore.GSON.fromJson(OmniCore.readFile("invasions.json"), new TypeToken<List<Invasion>>(){}.getType()));
 
         new BukkitRunnable() {
