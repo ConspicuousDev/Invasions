@@ -36,10 +36,10 @@ public class InvasionsJoinGUI extends OmniGUI {
     @Override
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
-        if(e.getSlot() == NORTH) Invasions.invasionInstance.spawnPlayer(player, BlockFace.NORTH);
-        else if(e.getSlot() == EAST) Invasions.invasionInstance.spawnPlayer(player, BlockFace.EAST);
-        else if(e.getSlot() == SOUTH) Invasions.invasionInstance.spawnPlayer(player, BlockFace.SOUTH);
-        else if(e.getSlot() == WEST) Invasions.invasionInstance.spawnPlayer(player, BlockFace.WEST);
+        if(e.getRawSlot() == NORTH) Invasions.invasionInstance.spawnPlayer(player, BlockFace.NORTH);
+        else if(e.getRawSlot() == EAST) Invasions.invasionInstance.spawnPlayer(player, BlockFace.EAST);
+        else if(e.getRawSlot() == SOUTH) Invasions.invasionInstance.spawnPlayer(player, BlockFace.SOUTH);
+        else if(e.getRawSlot() == WEST) Invasions.invasionInstance.spawnPlayer(player, BlockFace.WEST);
     }
 
     @Override

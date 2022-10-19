@@ -54,39 +54,39 @@ public class MobGearStatEditorGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         if(e.getClickedInventory() == player.getOpenInventory().getTopInventory()) e.setCancelled(true);
         else if(e.getAction() != InventoryAction.PICKUP_ALL) e.setCancelled(true);
-        if(e.getSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
+        if(e.getRawSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
         else if(e.getClickedInventory() == player.getOpenInventory().getTopInventory() && e.getCursor() != null && e.getCursor().getType() != Material.AIR && e.getAction() == InventoryAction.SWAP_WITH_CURSOR){
-            if(e.getSlot() == HELMET) mob.getItems()[0] = e.getCursor();
-            else if(e.getSlot() == CHESTPLATE) mob.getItems()[1] = e.getCursor();
-            else if(e.getSlot() == LEGGINGS) mob.getItems()[2] = e.getCursor();
-            else if(e.getSlot() == BOOTS) mob.getItems()[3] = e.getCursor();
-            else if(e.getSlot() == WEAPON) mob.getItems()[4] = e.getCursor();
+            if(e.getRawSlot() == HELMET) mob.getItems()[0] = e.getCursor();
+            else if(e.getRawSlot() == CHESTPLATE) mob.getItems()[1] = e.getCursor();
+            else if(e.getRawSlot() == LEGGINGS) mob.getItems()[2] = e.getCursor();
+            else if(e.getRawSlot() == BOOTS) mob.getItems()[3] = e.getCursor();
+            else if(e.getRawSlot() == WEAPON) mob.getItems()[4] = e.getCursor();
             else {
                 e.setCancelled(true);
                 return;
             }
             e.setCursor(new ItemStack(Material.AIR));
-        }else if(e.getSlot() == HELMET) mob.getItems()[0] = new ItemStack(Material.AIR);
-        else if(e.getSlot() == CHESTPLATE) mob.getItems()[1] = new ItemStack(Material.AIR);
-        else if(e.getSlot() == LEGGINGS) mob.getItems()[2] = new ItemStack(Material.AIR);
-        else if(e.getSlot() == BOOTS) mob.getItems()[3] = new ItemStack(Material.AIR);
-        else if(e.getSlot() == WEAPON) mob.getItems()[4] = new ItemStack(Material.AIR);
-        else if(e.getSlot() == HEALTH || e.getSlot() == SPEED || e.getSlot() == DAMAGE){
-            new AnswerRunnable(e.getSlot() == HEALTH ? "health" : e.getSlot() == SPEED ? "speed" : "damage", this, 15, value -> {
+        }else if(e.getRawSlot() == HELMET) mob.getItems()[0] = new ItemStack(Material.AIR);
+        else if(e.getRawSlot() == CHESTPLATE) mob.getItems()[1] = new ItemStack(Material.AIR);
+        else if(e.getRawSlot() == LEGGINGS) mob.getItems()[2] = new ItemStack(Material.AIR);
+        else if(e.getRawSlot() == BOOTS) mob.getItems()[3] = new ItemStack(Material.AIR);
+        else if(e.getRawSlot() == WEAPON) mob.getItems()[4] = new ItemStack(Material.AIR);
+        else if(e.getRawSlot() == HEALTH || e.getRawSlot() == SPEED || e.getRawSlot() == DAMAGE){
+            new AnswerRunnable(e.getRawSlot() == HEALTH ? "health" : e.getRawSlot() == SPEED ? "speed" : "damage", this, 15, value -> {
                 double v;
                 try{
                     v = Double.parseDouble(value);
                 }catch (NumberFormatException ex){
-                    player.sendMessage(Methods.color("&c"+(e.getSlot() == HEALTH ? "Health" : e.getSlot() == SPEED ? "Speed" : "Damage")+" must be a number."));
+                    player.sendMessage(Methods.color("&c"+(e.getRawSlot() == HEALTH ? "Health" : e.getRawSlot() == SPEED ? "Speed" : "Damage")+" must be a number."));
                     return;
                 }
                 if(v <= 0){
-                    player.sendMessage(Methods.color("&c"+(e.getSlot() == HEALTH ? "Health" : e.getSlot() == SPEED ? "Speed" : "Damage")+" must be positive."));
+                    player.sendMessage(Methods.color("&c"+(e.getRawSlot() == HEALTH ? "Health" : e.getRawSlot() == SPEED ? "Speed" : "Damage")+" must be positive."));
                     return;
                 }
-                if(e.getSlot() == HEALTH) mob.setHealth(v);
-                else if(e.getSlot() == SPEED) mob.setSpeed(v);
-                else if(e.getSlot() == DAMAGE) mob.setDamage(v);
+                if(e.getRawSlot() == HEALTH) mob.setHealth(v);
+                else if(e.getRawSlot() == SPEED) mob.setSpeed(v);
+                else if(e.getRawSlot() == DAMAGE) mob.setDamage(v);
             });
         }
     }

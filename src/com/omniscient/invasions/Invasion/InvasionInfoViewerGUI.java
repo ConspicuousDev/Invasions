@@ -54,10 +54,10 @@ public class InvasionInfoViewerGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) invasion.getMobs().size()/ MOBS.size());
-        if(e.getSlot() == BACK) new InvasionsInfoGUI(player).open();
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(MOBS.contains(e.getSlot()) && page* MOBS.size()+ MOBS.indexOf(e.getSlot()) < invasion.getMobs().size()) new MobDropsEditorGUI(player, invasion, invasion.getMobs().get(MOBS.indexOf(e.getSlot())+page*MOBS.size()), false).open();
+        if(e.getRawSlot() == BACK) new InvasionsInfoGUI(player).open();
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(MOBS.contains(e.getRawSlot()) && page* MOBS.size()+ MOBS.indexOf(e.getRawSlot()) < invasion.getMobs().size()) new MobDropsEditorGUI(player, invasion, invasion.getMobs().get(MOBS.indexOf(e.getRawSlot())+page*MOBS.size()), false).open();
     }
 
     @Override

@@ -53,17 +53,17 @@ public class MobEditorGUI extends OmniGUI {
     @Override
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
-        if(e.getSlot() == BACK) new MobListGUI(player, invasion).open();
-        else if(e.getSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("new name", this, 15, mob::setName);
-        else if(e.getSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_HALF){
+        if(e.getRawSlot() == BACK) new MobListGUI(player, invasion).open();
+        else if(e.getRawSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("new name", this, 15, mob::setName);
+        else if(e.getRawSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_HALF){
             int index = Arrays.stream(InvasionMob.Type.values()).collect(Collectors.toList()).indexOf(mob.getType());
             mob.setType(InvasionMob.Type.values()[index+1 >= InvasionMob.Type.values().length ? 0 : index+1]);
-        }else if(e.getSlot() == DROPS) new MobDropsEditorGUI(player, invasion, mob, true).open();
-        else if(e.getSlot() == LOCATIONS) new MobLocationsEditorGUI(player, invasion, mob).open();
-        else if(e.getSlot() == GEAR) new MobGearStatEditorGUI(player, invasion, mob).open();
-        else if(e.getSlot() == ABILITIES) new MobAbilitySelectorGUI(player, invasion, mob).open();
-        else if(e.getSlot() == SUMMON) mob.summon(player.getLocation());
-        else if(e.getSlot() == DELETE){
+        }else if(e.getRawSlot() == DROPS) new MobDropsEditorGUI(player, invasion, mob, true).open();
+        else if(e.getRawSlot() == LOCATIONS) new MobLocationsEditorGUI(player, invasion, mob).open();
+        else if(e.getRawSlot() == GEAR) new MobGearStatEditorGUI(player, invasion, mob).open();
+        else if(e.getRawSlot() == ABILITIES) new MobAbilitySelectorGUI(player, invasion, mob).open();
+        else if(e.getRawSlot() == SUMMON) mob.summon(player.getLocation());
+        else if(e.getRawSlot() == DELETE){
             invasion.getMobs().remove(mob);
             new MobListGUI(player, invasion).open();
         }

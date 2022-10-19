@@ -56,7 +56,7 @@ public class InvasionListGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) Invasion.invasions.size()/INVASIONS.size());
-        if(e.getSlot() == CONFIG){
+        if(e.getRawSlot() == CONFIG){
             if(e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("invasion cooldown", this, 15, value -> {
                 try{
                     Invasions.config.setCooldown(Integer.parseInt(value));
@@ -71,10 +71,10 @@ public class InvasionListGUI extends OmniGUI {
                     player.sendMessage(Methods.color("&cThe value must be the number of seconds."));
                 }
             });
-        }else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(e.getSlot() == NEW) new InvasionEditorGUI(player, new Invasion(UUID.randomUUID())).open();
-        else if(INVASIONS.contains(e.getSlot()) && page*INVASIONS.size()+INVASIONS.indexOf(e.getSlot()) < Invasion.invasions.size()) new InvasionEditorGUI(player, Invasion.invasions.get(INVASIONS.indexOf(e.getSlot())+page*INVASIONS.size())).open();
+        }else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(e.getRawSlot() == NEW) new InvasionEditorGUI(player, new Invasion(UUID.randomUUID())).open();
+        else if(INVASIONS.contains(e.getRawSlot()) && page*INVASIONS.size()+INVASIONS.indexOf(e.getRawSlot()) < Invasion.invasions.size()) new InvasionEditorGUI(player, Invasion.invasions.get(INVASIONS.indexOf(e.getRawSlot())+page*INVASIONS.size())).open();
     }
 
     @Override

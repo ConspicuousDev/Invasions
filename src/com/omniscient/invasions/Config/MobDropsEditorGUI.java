@@ -68,10 +68,10 @@ public class MobDropsEditorGUI extends OmniGUI {
             ItemStack drop = e.getCurrentItem();
             if(drop == null || drop.getType() == Material.AIR) return;
             mob.getDrops().add(drop);
-        }else if(e.getSlot() == BACK){
+        }else if(e.getRawSlot() == BACK){
             if(admin) new MobEditorGUI(player, invasion, mob).open();
             else new InvasionInfoViewerGUI(player, invasion).open();
-        }else if(admin && e.getSlot() == AMOUNT) new AnswerRunnable("drop amount", this, 15, value -> {
+        }else if(admin && e.getRawSlot() == AMOUNT) new AnswerRunnable("drop amount", this, 15, value -> {
             try{
                 int i = Integer.parseInt(value);
                 if(i < 0) Methods.color("&cThe amount must be greater than zero.");
@@ -80,9 +80,9 @@ public class MobDropsEditorGUI extends OmniGUI {
                 player.sendMessage(Methods.color("&cThe amount must be a number."));
             }
         });
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(admin && DROPS.contains(e.getSlot()) && page* DROPS.size()+ DROPS.indexOf(e.getSlot()) < mob.getDrops().size() && e.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) mob.getDrops().remove(mob.getDrops().get(page* DROPS.size()+ DROPS.indexOf(e.getSlot())));
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(admin && DROPS.contains(e.getRawSlot()) && page* DROPS.size()+ DROPS.indexOf(e.getRawSlot()) < mob.getDrops().size() && e.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) mob.getDrops().remove(mob.getDrops().get(page* DROPS.size()+ DROPS.indexOf(e.getRawSlot())));
     }
 
     @Override

@@ -45,9 +45,9 @@ public class LocationEditorGUI extends OmniGUI {
     @Override
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
-        if(e.getSlot() == BACK) new InvasionEditorGUI(player, invasion).open();
-        else if(LOCATIONS.contains(e.getSlot())){
-            BlockFace blockFace = BLOCK_FACES.get(LOCATIONS.indexOf(e.getSlot()));
+        if(e.getRawSlot() == BACK) new InvasionEditorGUI(player, invasion).open();
+        else if(LOCATIONS.contains(e.getRawSlot())){
+            BlockFace blockFace = BLOCK_FACES.get(LOCATIONS.indexOf(e.getRawSlot()));
             if(e.getAction() == InventoryAction.PICKUP_ALL){
                 if(invasion.getLocations().get(blockFace) == null) invasion.getLocations().put(blockFace, player.getLocation());
                 else player.teleport(invasion.getLocations().get(blockFace));

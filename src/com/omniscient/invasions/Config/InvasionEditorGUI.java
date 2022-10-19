@@ -46,16 +46,16 @@ public class InvasionEditorGUI extends OmniGUI {
     @Override
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
-        if(e.getSlot() == BACK) new InvasionListGUI(player).open();
-        else if(e.getSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("new name", this, 15, invasion::setName);
-        else if(e.getSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_HALF) {
+        if(e.getRawSlot() == BACK) new InvasionListGUI(player).open();
+        else if(e.getRawSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("new name", this, 15, invasion::setName);
+        else if(e.getRawSlot() == VISUAL && e.getAction() == InventoryAction.PICKUP_HALF) {
             int index = Arrays.stream(Invasion.Skin.values()).collect(Collectors.toList()).indexOf(invasion.getSkin());
             invasion.setSkin(Invasion.Skin.values()[index+1 >= Invasion.Skin.values().length ? 0 : index+1]);
-        }else if(e.getSlot() == LOCATIONS) new LocationEditorGUI(player, invasion).open();
-        else if(e.getSlot() == MOBS) new MobListGUI(player, invasion).open();
-        else if(e.getSlot() == COMMANDS && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("open command", this, 30, invasion::setOpenCommand);
-        else if(e.getSlot() == COMMANDS && e.getAction() == InventoryAction.PICKUP_HALF) new AnswerRunnable("close command", this, 30, invasion::setCloseCommand);
-        else if(e.getSlot() == DELETE){
+        }else if(e.getRawSlot() == LOCATIONS) new LocationEditorGUI(player, invasion).open();
+        else if(e.getRawSlot() == MOBS) new MobListGUI(player, invasion).open();
+        else if(e.getRawSlot() == COMMANDS && e.getAction() == InventoryAction.PICKUP_ALL) new AnswerRunnable("open command", this, 30, invasion::setOpenCommand);
+        else if(e.getRawSlot() == COMMANDS && e.getAction() == InventoryAction.PICKUP_HALF) new AnswerRunnable("close command", this, 30, invasion::setCloseCommand);
+        else if(e.getRawSlot() == DELETE){
             Invasion.invasions.remove(invasion);
             new InvasionListGUI(player).open();
         }

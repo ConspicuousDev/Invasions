@@ -48,8 +48,8 @@ public class InvasionsGUI extends OmniGUI {
     @Override
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
-        if(e.getSlot() == INVASION && Invasions.invasionInstance != null) new InvasionsJoinGUI(player).open();
-        else if(e.getSlot() == INFO) new InvasionsInfoGUI(player).open();
+        if(e.getRawSlot() == INVASION && Invasions.invasionInstance != null) new InvasionsJoinGUI(player).open();
+        else if(e.getRawSlot() == INFO) new InvasionsInfoGUI(player).open();
     }
 
     @Override

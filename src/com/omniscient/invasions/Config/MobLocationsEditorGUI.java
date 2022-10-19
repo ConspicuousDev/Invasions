@@ -60,12 +60,12 @@ public class MobLocationsEditorGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) mob.getLocations().size()/ LOCATIONS.size());
-        if(e.getSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(e.getSlot() == NEW) mob.getLocations().add(player.getLocation());
-        else if(LOCATIONS.contains(e.getSlot()) && page* LOCATIONS.size()+ LOCATIONS.indexOf(e.getSlot()) < mob.getLocations().size()){
-            Location location = mob.getLocations().get(LOCATIONS.indexOf(e.getSlot())+page* LOCATIONS.size());
+        if(e.getRawSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(e.getRawSlot() == NEW) mob.getLocations().add(player.getLocation());
+        else if(LOCATIONS.contains(e.getRawSlot()) && page* LOCATIONS.size()+ LOCATIONS.indexOf(e.getRawSlot()) < mob.getLocations().size()){
+            Location location = mob.getLocations().get(LOCATIONS.indexOf(e.getRawSlot())+page* LOCATIONS.size());
             if(e.getAction() == InventoryAction.PICKUP_ALL) player.teleport(location);
             else if(e.getAction() == InventoryAction.PICKUP_HALF) mob.getLocations().remove(location);
         }

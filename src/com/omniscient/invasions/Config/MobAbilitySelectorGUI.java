@@ -57,11 +57,11 @@ public class MobAbilitySelectorGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) mob.getAbilities().size()/ ABILITIES.size());
-        if(e.getSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(ABILITIES.contains(e.getSlot()) && page* ABILITIES.size()+ ABILITIES.indexOf(e.getSlot()) < InvasionMob.Ability.values().length){
-            InvasionMob.Ability ability = InvasionMob.Ability.values()[ABILITIES.indexOf(e.getSlot())+page* ABILITIES.size()];
+        if(e.getRawSlot() == BACK) new MobEditorGUI(player, invasion, mob).open();
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(ABILITIES.contains(e.getRawSlot()) && page* ABILITIES.size()+ ABILITIES.indexOf(e.getRawSlot()) < InvasionMob.Ability.values().length){
+            InvasionMob.Ability ability = InvasionMob.Ability.values()[ABILITIES.indexOf(e.getRawSlot())+page* ABILITIES.size()];
             if(mob.getAbilities().contains(ability)) mob.getAbilities().remove(ability);
             else mob.getAbilities().add(ability);
         }

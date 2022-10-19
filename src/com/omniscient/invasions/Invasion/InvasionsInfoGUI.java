@@ -54,10 +54,10 @@ public class InvasionsInfoGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) Invasion.invasions.size()/INVASIONS.size());
-        if(e.getSlot() == BACK) new InvasionsGUI(player).open();
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(INVASIONS.contains(e.getSlot()) && page*INVASIONS.size()+INVASIONS.indexOf(e.getSlot()) < Invasion.invasions.size()) new InvasionInfoViewerGUI(player, Invasion.invasions.get(INVASIONS.indexOf(e.getSlot())+page*INVASIONS.size())).open();
+        if(e.getRawSlot() == BACK) new InvasionsGUI(player).open();
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(INVASIONS.contains(e.getRawSlot()) && page*INVASIONS.size()+INVASIONS.indexOf(e.getRawSlot()) < Invasion.invasions.size()) new InvasionInfoViewerGUI(player, Invasion.invasions.get(INVASIONS.indexOf(e.getRawSlot())+page*INVASIONS.size())).open();
     }
 
     @Override

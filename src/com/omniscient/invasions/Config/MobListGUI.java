@@ -56,14 +56,14 @@ public class MobListGUI extends OmniGUI {
     public void onInteract(InventoryClickEvent e) {
         e.setCancelled(true);
         int maxPage = (int) Math.ceil((double) invasion.getMobs().size()/ MOBS.size());
-        if(e.getSlot() == BACK) new InvasionEditorGUI(player, invasion).open();
-        else if(page > 0 && e.getSlot() == PREVIOUS) page--;
-        else if(page < maxPage-1 && e.getSlot() == NEXT) page++;
-        else if(e.getSlot() == NEW) {
+        if(e.getRawSlot() == BACK) new InvasionEditorGUI(player, invasion).open();
+        else if(page > 0 && e.getRawSlot() == PREVIOUS) page--;
+        else if(page < maxPage-1 && e.getRawSlot() == NEXT) page++;
+        else if(e.getRawSlot() == NEW) {
             InvasionMob mob = new InvasionMob(UUID.randomUUID());
             invasion.getMobs().add(mob);
             new MobEditorGUI(player, invasion, mob).open();
-        } else if(MOBS.contains(e.getSlot()) && page* MOBS.size()+ MOBS.indexOf(e.getSlot()) < invasion.getMobs().size()) new MobEditorGUI(player, invasion, invasion.getMobs().get(MOBS.indexOf(e.getSlot())+page*MOBS.size())).open();
+        } else if(MOBS.contains(e.getRawSlot()) && page* MOBS.size()+ MOBS.indexOf(e.getRawSlot()) < invasion.getMobs().size()) new MobEditorGUI(player, invasion, invasion.getMobs().get(MOBS.indexOf(e.getRawSlot())+page*MOBS.size())).open();
     }
 
     @Override
