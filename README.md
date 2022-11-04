@@ -13,4 +13,4 @@ The setup of invasions and mobs can be done through the interactive configuratio
   - Config command.
 
 ## Showcase
-Click [here](https://youtu.be/Oa_9OsiKkcQ) for the showcase (v1.0).
+Click [here](https://www.youtube.com/watch?v=GwBoYpPes38) for the showcase (v1.3).
